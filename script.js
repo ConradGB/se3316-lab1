@@ -1,26 +1,28 @@
-﻿window.onload = function () {
-
-    var list = document.getElementById("fruits");
+﻿$(document).ready(function ()
+{
+    var $list = $('#fruits');
+    
 
     var entries = ["Guava", "Mango", "Pineapple", "Passionfruit", "Pomegranate"];
-    var oHold = [];
+
 
     for (i = 0; i < entries.length; i++) {
-        var entry = document.createElement("li");
-        oHold.push(entry);
-        entry.appendChild(document.createTextNode(entries[i]));
-        list.appendChild(entry);
+        $list.append("<li id=" + entries[i] + ">" + entries[i] + "</li>")
     }
 
-    (function () {
-        var basket = document.getElementById("basket");
-        var textBox = document.getElementById("newfruit");
+    $("#newfruit").change(function () {
 
-        textBox.onchange = function () {
             for (j = 0; j < entries.length; j++) {
-                if (textBox.value == entries[j])
-                    basket.appendChild(oHold[j]);
+                if (entries[j] == $("#newfruit").val()) {
+
+                    $(("#" + entries[j])).remove();
+
+                    $('#basket').append("<li id=" + entries[j] + ">" + entries[j] + "</li>");
+                }
             }
-        }
-    })();
-}
+        
+    });
+    
+    
+    
+});
